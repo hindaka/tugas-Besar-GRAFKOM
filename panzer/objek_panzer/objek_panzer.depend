@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1337901334 source:d:\grafkom\tugas akhir grafkom\panzer\objek_panzer\main.cpp
+	<Windows.h>
+	<iostream>
+	<gl\GL.h>
+	<gl\GLU.h>
+	<gl\glut.h>
+	<math.h>
+
