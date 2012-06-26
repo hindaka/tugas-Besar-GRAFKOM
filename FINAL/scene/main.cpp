@@ -514,19 +514,18 @@ void garasi()
     //atap kanan
     glBegin(GL_POLYGON);
     glColor3f(0.3,0.2,0.8);
-        glVertex3f(0.75,0.7,0.0);
-        glVertex3f(1.5,0.5,0.0);
-        glVertex3f(1.5,0.5,-1.8);
-        glVertex3f(0.75,0.7,-1.8);
+        glTexCoord2f(1.0,0.0);glVertex3f(0.75,0.7,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(1.5,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(1.5,0.5,-1.8);
+        glTexCoord2f(0.0,0.0);glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //atap kiri
     glBegin(GL_POLYGON);
-    glColor3f(0.0,0.2,0.8);
-        glVertex3f(0.75,0.7,0.0);
-        glVertex3f(0.0,0.5,0.0);
-        glVertex3f(0.0,0.5,-1.8);
-        glVertex3f(0.75,0.7,-1.8);
+        glTexCoord2f(1.0,0.0);glVertex3f(0.75,0.7,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(0.0,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(0.0,0.5,-1.8);
+        glTexCoord2f(0.0,0.0);glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //bagian atas
@@ -537,50 +536,46 @@ void garasi()
         glVertex3f(1.5,0.5,-1.8);
         glVertex3f(0.0,0.5,-1.8);
     glEnd();
-
+    glBindTexture(GL_TEXTURE_2D,texture[11]);
     //bagian belakang
     glBegin(GL_POLYGON);
     glColor3f(0.2,0.2,0.2);
-        glVertex3f(0.0,0.0,-1.8);
-        glVertex3f(1.5,0.0,-1.8);
-        glVertex3f(1.5,0.5,-1.8);
-        glVertex3f(0.0,0.5,-1.8);
+        glTexCoord2f(0.0,0.0);glVertex3f(0.0,0.0,-1.8);
+        glTexCoord2f(1.0,0.0);glVertex3f(1.5,0.0,-1.8);
+        glTexCoord2f(1.0,1.0);glVertex3f(1.5,0.5,-1.8);
+        glTexCoord2f(0.0,1.0);glVertex3f(0.0,0.5,-1.8);
     glEnd();
 
     //bagian kanan
     glBegin(GL_POLYGON);
-    glColor3f(0.4,0.5,0.1);
-        glVertex3f(0.0,0.0,0.0);
-        glVertex3f(0.0,0.5,0.0);
-        glVertex3f(0.0,0.5,-1.8);
-        glVertex3f(0.0,0.0,-1.8);
+        glTexCoord2f(1.0,0.0);glVertex3f(0.0,0.0,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(0.0,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(0.0,0.5,-1.8);
+        glTexCoord2f(0.0,0.0);glVertex3f(0.0,0.0,-1.8);
     glEnd();
 
     //bagian tutup kanan
     glBegin(GL_POLYGON);
-    glColor3f(0.2,0.2,0.2);
-        glVertex3f(0.0,0.0,0.0);
-        glVertex3f(0.25,0.0,0.0);
-        glVertex3f(0.25,0.5,0.0);
-        glVertex3f(0.0,0.5,0.0);
+        glTexCoord2f(0.0,0.0);glVertex3f(0.0,0.0,0.0);
+        glTexCoord2f(1.0,0.0);glVertex3f(0.25,0.0,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(0.25,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(0.0,0.5,0.0);
     glEnd();
 
     //bagian kiri
     glBegin(GL_POLYGON);
-    glColor3f(0.2,0.3,0.5);
-        glVertex3f(1.5,0.0,0.0);
-        glVertex3f(1.5,0.5,0.0);
-        glVertex3f(1.5,0.5,-1.8);
-        glVertex3f(1.5,0.0,-1.8);
+        glTexCoord2f(1.0,0.0);glVertex3f(1.5,0.0,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(1.5,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(1.5,0.5,-1.8);
+        glTexCoord2f(0.0,0.0);glVertex3f(1.5,0.0,-1.8);
     glEnd();
 
     //bagian tutup kanan
     glBegin(GL_POLYGON);
-    glColor3f(0.2,0.2,0.2);
-        glVertex3f(1.5,0.0,0.0);
-        glVertex3f(1.25,0.0,0.0);
-        glVertex3f(1.25,0.5,0.0);
-        glVertex3f(1.5,0.5,0.0);
+        glTexCoord2f(0.0,0.0);glVertex3f(1.5,0.0,0.0);
+        glTexCoord2f(1.0,0.0);glVertex3f(1.25,0.0,0.0);
+        glTexCoord2f(1.0,1.0);glVertex3f(1.25,0.5,0.0);
+        glTexCoord2f(0.0,1.0);glVertex3f(1.5,0.5,0.0);
     glEnd();
 //============== END BODY GARASI=====================//
     glPopMatrix();
@@ -1167,6 +1162,7 @@ void display(void) {
 	glPopMatrix();
 
     glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D,texture[12]);
 	glScaled(60, 70, 50);
 	glTranslatef(-2, 0, 3);
 	glRotatef(270,0,1,0);
@@ -1234,6 +1230,8 @@ void init(void) {
 	_terrainAir = loadTerrain("heightmapAir.bmp", 20);
 	texture[3] = loadtextures("wood.raw", 256, 256);
 	texture[10] = loadtextures("kulit panser.bmp",495,495);
+	texture[11] = loadtextures("dinding.bmp",512,512);
+	texture[12] = loadtextures("kenteng.bmp",1200,798);
 	texture[1] = loadtextures("water.bmp", 256, 256);
 	texture[2] = loadtextures("Water.raw", 400, 199);//lantai
 	texture[0] = loadtextures3D("rumput.bmp", 400, 199);
