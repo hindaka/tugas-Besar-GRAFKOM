@@ -6,3 +6,23 @@
 1339593473 c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\header\vec3f.h
 	<iostream>
 
+1340668849 source:c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<OpenGL/OpenGL.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<GL/glu.h>
+	<GL/gl.h>
+	"header/imageloader.h"
+	"header/vec3f.h"
+
+1339593473 c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\header\imageloader.h
+
+1339593473 source:c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\header\imageloader.cpp
+	<assert.h>
+	<fstream>
+	"imageloader.h"
+
