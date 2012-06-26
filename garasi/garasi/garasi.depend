@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1340626571 source:c:\users\hindaka_a43s\tugas-besar-grafkom\garasi\garasi\main.cpp
+1340628425 source:c:\users\hindaka_a43s\tugas-besar-grafkom\garasi\garasi\main.cpp
 	<Windows.h>
 	<iostream>
 	<gl\GL.h>

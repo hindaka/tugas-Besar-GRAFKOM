@@ -13,9 +13,11 @@
 #include "header/vec3f.h"
 #endif
 
-static GLfloat spin, spin2 = 0.0;
+static GLfloat spin,muter = 0.0;
+static int posx=0,posy=0,posz =0;
 float angle = 0;
 using namespace std;
+
 
 float lastx, lasty;
 GLint stencilBits;
@@ -327,7 +329,7 @@ void initRendering() {
 
 void drawScene() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	/*
+    /*
 	 glMatrixMode(GL_MODELVIEW);
 	 glLoadIdentity();
 	 glTranslatef(0.0f, 0.0f, -10.0f);
@@ -341,7 +343,7 @@ void drawScene() {
 	 GLfloat lightPos0[] = {-0.5f, 0.8f, 0.1f, 0.0f};
 	 glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 	 glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
-	 */
+    */
 	float scale = 500.0f / max(_terrain->width() - 1, _terrain->length() - 1);
 	glScalef(scale, scale, scale);
 	glTranslatef(-(float) (_terrain->width() - 1) / 2, 0.0f,
@@ -404,12 +406,10 @@ void drawSceneTanah(Terrain *terrain, GLfloat r, GLfloat g, GLfloat b) {
 }
 
 void update(int value) {
-	/*
 	 _angle += 1.0f;
 	 if (_angle > 360) {
 	 _angle -= 360;
 	 }
-	 */
 	glutPostRedisplay();
 	glutTimerFunc(25, update, 0);
 }
@@ -433,14 +433,6 @@ GLuint loadtextures(const char *filename, int width, int height) {
 	unsigned char *data;
 	FILE *file;
 
-	/*
-	 if (filename == "water.bmp") {
-	 Image *img = loadBMP(filename);
-	 width = img->width;
-	 height = img->height;
-	 }
-	 */
-
 	file = fopen(filename, "rb");
 	if (file == NULL)
 		return 0;
@@ -456,8 +448,8 @@ GLuint loadtextures(const char *filename, int width, int height) {
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
 			GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glTexParameterf(  GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	//glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTexParameterf(  GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB,
 			GL_UNSIGNED_BYTE, data);
 
@@ -472,13 +464,6 @@ GLuint loadtextures3D(const char *filename, int width, int height) {
 	unsigned char *data;
 	FILE *file;
 
-	/*
-	 if (filename == "water.bmp") {
-	 Image *img = loadBMP(filename);
-	 width = img->width;
-	 height = img->height;
-	 }
-	 */
 
 	file = fopen(filename, "rb");
 	if (file == NULL)
@@ -495,8 +480,8 @@ GLuint loadtextures3D(const char *filename, int width, int height) {
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
 			GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glTexParameterf(  GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	//glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+	glTexParameterf(  GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB,
 			GL_UNSIGNED_BYTE, data);
 
@@ -518,70 +503,93 @@ const GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
 const GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat high_shininess[] = { 100.0f };
 
-unsigned int texture_lantai;
-unsigned int texture_pagar;
-unsigned int kayu;
 unsigned int LoadTextureFromBmpFile(char *filename);
 
 void garasi()
 {
-//============== BEGIN BODY GARASI=====================//
     glPushMatrix();
+    glTranslatef(-2.0f,0.0f,-3.0f);
+//============== BEGIN BODY GARASI=====================//
+
     //atap kanan
-    glBegin(GL_QUADS);
-        glVertex3f(0.5,0.7,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
-        glVertex3f(0.5,0.7,-1.8);
+    glBegin(GL_POLYGON);
+    glColor3f(0.3,0.2,0.8);
+        glVertex3f(0.75,0.7,0.0);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
+        glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //atap kiri
-    glBegin(GL_QUADS);
-        glVertex3f(0.5,0.7,0.0);
+    glBegin(GL_POLYGON);
+    glColor3f(0.0,0.2,0.8);
+        glVertex3f(0.75,0.7,0.0);
         glVertex3f(0.0,0.5,0.0);
         glVertex3f(0.0,0.5,-1.8);
-        glVertex3f(0.5,0.7,-1.8);
+        glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //bagian atas
-    glBegin(GL_QUADS);
+    glBegin(GL_POLYGON);
+    glColor3f(0.3,0.2,0.1);
         glVertex3f(0.0,0.5,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
         glVertex3f(0.0,0.5,-1.8);
     glEnd();
 
     //bagian belakang
-    glBegin(GL_QUADS);
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.2,0.2);
         glVertex3f(0.0,0.0,-1.8);
-        glVertex3f(1.0,0.0,-1.8);
-        glVertex3f(1.0,0.5,-1.8);
+        glVertex3f(1.5,0.0,-1.8);
+        glVertex3f(1.5,0.5,-1.8);
         glVertex3f(0.0,0.5,-1.8);
     glEnd();
 
     //bagian kanan
-    glBegin(GL_QUADS);
+    glBegin(GL_POLYGON);
+    glColor3f(0.4,0.5,0.1);
         glVertex3f(0.0,0.0,0.0);
         glVertex3f(0.0,0.5,0.0);
         glVertex3f(0.0,0.5,-1.8);
         glVertex3f(0.0,0.0,-1.8);
     glEnd();
 
-    //bagian kiri
-    glBegin(GL_QUADS);
-        glVertex3f(1.0,0.0,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
-        glVertex3f(1.0,0.0,-1.8);
+    //bagian tutup kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.2,0.2);
+        glVertex3f(0.0,0.0,0.0);
+        glVertex3f(0.25,0.0,0.0);
+        glVertex3f(0.25,0.5,0.0);
+        glVertex3f(0.0,0.5,0.0);
     glEnd();
-    glPopMatrix();
-//============== END BODY GARASI=====================//
-}
 
+    //bagian kiri
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.3,0.5);
+        glVertex3f(1.5,0.0,0.0);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
+        glVertex3f(1.5,0.0,-1.8);
+    glEnd();
+
+    //bagian tutup kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.2,0.2);
+        glVertex3f(1.5,0.0,0.0);
+        glVertex3f(1.25,0.0,0.0);
+        glVertex3f(1.25,0.5,0.0);
+        glVertex3f(1.5,0.5,0.0);
+    glEnd();
+//============== END BODY GARASI=====================//
+    glPopMatrix();
+}
 void panzer()
 {
     glPushMatrix();
 //============== BEGIN BODY PANZER=====================//
+    glTranslatef(2.0,0.0,0.0);
     //bagian bawah
     glBegin(GL_QUADS);
     glColor3f(0.0f,0.0f,0.0f);
@@ -1160,17 +1168,18 @@ void display(void) {
 
     glPushMatrix();
 	glScaled(60, 70, 50);
-	glRotatef(90,0,1,0);
 	glTranslatef(-2, 0, 3);
+	glRotatef(270,0,1,0);
 	glColor3f(0.2,0.4,0.5);
 	garasi();
 	glPopMatrix();
 
 
     glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D,texture[10]);
 	glScaled(20, 20, 20);
-	glTranslatef(-4.5,0.5,4.5);
-	glBindTexture(GL_TEXTURE_2D,texture[10]);
+	glTranslatef(-4.5+posx,0.5,3.5+posz);
+    glRotatef(muter,0,1,0);
 	panzer();
 	glPopMatrix();
 
@@ -1209,19 +1218,17 @@ void display(void) {
 }
 
 void init(void) {
+    initRendering();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_COLOR_MATERIAL);
-	glDepthFunc(GL_LEQUAL);
 	glShadeModel(GL_SMOOTH);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_TEXTURE_3D);
-	initRendering();
 	_terrain = loadTerrain("heightmap.bmp", 20);
 	_terrainTanah = loadTerrain("heightmapTanah.bmp", 20);
 	_terrainAir = loadTerrain("heightmapAir.bmp", 20);
@@ -1303,7 +1310,7 @@ static void keyB(int key, int x, int y) {
 }
 
 void keyboard(unsigned char key, int x, int y) {
-	if (key == 'd') {
+	/*if (key == 'd') {
 
 		spin = spin - 1;
 		if (spin > 360.0)
@@ -1313,6 +1320,17 @@ void keyboard(unsigned char key, int x, int y) {
 		spin = spin + 1;
 		if (spin > 360.0)
 			spin = spin - 360.0;
+	}*/
+    if (key == 'm') {
+
+		muter = muter - 1;
+		if (muter > 360.0)
+			muter = muter - 360.0;
+	}
+	if (key == 'n') {
+		muter = muter + 1;
+		if (muter > 360.0)
+			muter = muter - 360.0;
 	}
 	if (key == 'q') {
 		viewz++;
@@ -1326,6 +1344,7 @@ void keyboard(unsigned char key, int x, int y) {
 	if (key == 'w') {
 		viewy++;
 	}
+
 }
 
 void reshape(int w, int h) {

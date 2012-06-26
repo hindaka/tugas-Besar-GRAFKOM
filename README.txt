@@ -1,6 +1,8 @@
 
 FINAL tapi masih ada bug.. 
 
-missing piece panser dan garasinya
+masih missing piece panser,tapi tinggal sedikit yang hilang,,
+
+garasi FIX
 
 hindaka

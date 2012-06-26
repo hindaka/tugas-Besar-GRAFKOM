@@ -17,45 +17,36 @@ void panzer()
     //atap kanan
     glBegin(GL_POLYGON);
     glColor3f(0.3,0.2,0.8);
-        glVertex3f(0.5,0.7,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
-        glVertex3f(0.5,0.7,-1.8);
+        glVertex3f(0.75,0.7,0.0);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
+        glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //atap kiri
     glBegin(GL_POLYGON);
     glColor3f(0.0,0.2,0.8);
-        glVertex3f(0.5,0.7,0.0);
+        glVertex3f(0.75,0.7,0.0);
         glVertex3f(0.0,0.5,0.0);
         glVertex3f(0.0,0.5,-1.8);
-        glVertex3f(0.5,0.7,-1.8);
+        glVertex3f(0.75,0.7,-1.8);
     glEnd();
 
     //bagian atas
     glBegin(GL_POLYGON);
     glColor3f(0.3,0.2,0.1);
         glVertex3f(0.0,0.5,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
         glVertex3f(0.0,0.5,-1.8);
-    glEnd();
-
-    //bagian bawah
-    glBegin(GL_POLYGON);
-    glColor3f(0.3,0.2,0.1);
-        glVertex3f(-0.7,0.0,2.0);
-        glVertex3f(3.0,0.0,2.0);
-        glVertex3f(3.0,0.0,-2.8);
-        glVertex3f(-0.7,0.0,-2.8);
     glEnd();
 
     //bagian belakang
     glBegin(GL_POLYGON);
     glColor3f(0.2,0.2,0.2);
         glVertex3f(0.0,0.0,-1.8);
-        glVertex3f(1.0,0.0,-1.8);
-        glVertex3f(1.0,0.5,-1.8);
+        glVertex3f(1.5,0.0,-1.8);
+        glVertex3f(1.5,0.5,-1.8);
         glVertex3f(0.0,0.5,-1.8);
     glEnd();
 
@@ -68,13 +59,31 @@ void panzer()
         glVertex3f(0.0,0.0,-1.8);
     glEnd();
 
+    //bagian tutup kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.2,0.2);
+        glVertex3f(0.0,0.0,0.0);
+        glVertex3f(0.25,0.0,0.0);
+        glVertex3f(0.25,0.5,0.0);
+        glVertex3f(0.0,0.5,0.0);
+    glEnd();
+
     //bagian kiri
     glBegin(GL_POLYGON);
     glColor3f(0.2,0.3,0.5);
-        glVertex3f(1.0,0.0,0.0);
-        glVertex3f(1.0,0.5,0.0);
-        glVertex3f(1.0,0.5,-1.8);
-        glVertex3f(1.0,0.0,-1.8);
+        glVertex3f(1.5,0.0,0.0);
+        glVertex3f(1.5,0.5,0.0);
+        glVertex3f(1.5,0.5,-1.8);
+        glVertex3f(1.5,0.0,-1.8);
+    glEnd();
+
+    //bagian tutup kanan
+    glBegin(GL_POLYGON);
+    glColor3f(0.2,0.2,0.2);
+        glVertex3f(1.5,0.0,0.0);
+        glVertex3f(1.25,0.0,0.0);
+        glVertex3f(1.25,0.5,0.0);
+        glVertex3f(1.5,0.5,0.0);
     glEnd();
 //============== END BODY GARASI=====================//
     glutSwapBuffers();
