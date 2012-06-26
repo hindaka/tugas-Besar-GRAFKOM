@@ -10,6 +10,8 @@ static int putarx=0 ,putary=0 ,putarz=0;
 void pohon()
 {
     glPushMatrix();
+    glRotatef((GLfloat)putarx,0,1,0);
+    glPushMatrix();
         glScalef(0.2f,3.0f,0.2f);
         glutSolidCube(0.5);
     glPopMatrix();
@@ -26,6 +28,8 @@ void pohon()
         glScalef(0.2f,0.2f,0.2f);
         glTranslatef(0.0f,1.5f,0.0f);
         glutSolidSphere(1,20,200);
+    glPopMatrix();
+
     glPopMatrix();
 
 }

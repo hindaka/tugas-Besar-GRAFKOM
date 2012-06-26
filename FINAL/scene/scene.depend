@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1339593473 source:c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\header\vec3f.cpp
+	<math.h>
+	"vec3f.h"
+
+1339593473 c:\users\hindaka_a43s\tugas-besar-grafkom\final\scene\header\vec3f.h
+	<iostream>
+

@@ -1,6 +1,3 @@
-First step,,
-Base Floor
-panzer
-	-objek panzer
-	-objek roda
-tree
+FINAL tapi masih ada bug.. 
+
+hindaka

@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="objek_panzer" />
+		<Option title="scene" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\objek_panzer" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\Debug\scene" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -15,13 +15,13 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="C:\Program Files\CodeBlocks\MinGW\lib\libopengl32.a" />
-					<Add library="C:\Program Files\CodeBlocks\MinGW\lib\libglu32.a" />
-					<Add library="C:\Program Files\CodeBlocks\MinGW\lib\libglut32.a" />
+					<Add library="glu32" />
+					<Add library="glut32" />
+					<Add library="opengl32" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\objek_panzer" prefix_auto="1" extension_auto="1" />
+				<Option output="bin\Release\scene" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -37,7 +37,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="kulit panser.bmp" />
+		<Unit filename="header\imageloader.cpp" />
+		<Unit filename="header\imageloader.h" />
+		<Unit filename="header\vec3f.cpp" />
+		<Unit filename="header\vec3f.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
