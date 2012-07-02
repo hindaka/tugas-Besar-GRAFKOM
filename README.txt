@@ -1,8 +1,3 @@
-
-FINAL tapi masih ada bug.. 
-
-masih missing piece panser,tapi tinggal sedikit yang hilang,,
-
-garasi FIX + Texture
+hasil akhir.. bug panser bingung untuk memperbaikinya
 
 hindaka

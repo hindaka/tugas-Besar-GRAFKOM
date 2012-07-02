@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1337896794 source:d:\grafkom\tugas akhir grafkom\panzer\objek roda\roda_panzer\main.cpp
-	<Windows.h>
-	<iostream>
-	<gl\GL.h>
-	<gl\GLU.h>
-	<gl\glut.h>
-	<math.h>
-

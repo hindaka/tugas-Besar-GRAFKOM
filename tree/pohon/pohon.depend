@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1338872711 source:c:\users\hindaka_a43s\tugas-besar-grafkom\tree\pohon\main.cpp
-	<Windows.h>
-	<iostream>
-	<gl\GL.h>
-	<gl\GLU.h>
-	<gl\glut.h>
-	<math.h>
-

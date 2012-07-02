@@ -14,7 +14,7 @@
 #endif
 
 static GLfloat spin,muter = 0.0;
-static int posx=0,posy=0,posz =0;
+static int posx=0,posy=2.0,posz =0,tree=0,z=0;
 float angle = 0;
 using namespace std;
 
@@ -33,6 +33,21 @@ struct ImageTexture {
 	char *data;
 };
 typedef struct ImageTexture ImageTexture; //struktur data untuk
+
+const GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+const GLfloat light_diffuse[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+const GLfloat light_position[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+const GLfloat light_ambient2[] = { 0.3f, 0.3f, 0.3f, 0.0f };
+const GLfloat light_diffuse2[] = { 0.3f, 0.3f, 0.3f, 0.0f };
+
+const GLfloat mat_ambient[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+const GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+const GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+const GLfloat high_shininess[] = { 100.0f };
+
+unsigned int LoadTextureFromBmpFile(char *filename);
 
 
 //train 2D
@@ -458,53 +473,6 @@ GLuint loadtextures(const char *filename, int width, int height) {
 	return texture;
 }
 
-GLuint loadtextures3D(const char *filename, int width, int height) {
-	GLuint texture;
-
-	unsigned char *data;
-	FILE *file;
-
-
-	file = fopen(filename, "rb");
-	if (file == NULL)
-		return 0;
-
-	data = (unsigned char *) malloc(width * height * 3);
-	fread(data, width * height * 3, 1, file);
-
-	fclose(file);
-
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-			GL_LINEAR_MIPMAP_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(  GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB,
-			GL_UNSIGNED_BYTE, data);
-
-	data = NULL;
-
-	return texture;
-}
-
-const GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
-const GLfloat light_diffuse[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat light_position[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-const GLfloat light_ambient2[] = { 0.3f, 0.3f, 0.3f, 0.0f };
-const GLfloat light_diffuse2[] = { 0.3f, 0.3f, 0.3f, 0.0f };
-
-const GLfloat mat_ambient[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-const GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-const GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat high_shininess[] = { 100.0f };
-
-unsigned int LoadTextureFromBmpFile(char *filename);
-
 void garasi()
 {
     glPushMatrix();
@@ -580,6 +548,29 @@ void garasi()
 //============== END BODY GARASI=====================//
     glPopMatrix();
 }
+void pohon()
+{
+    // Draw daun cone
+    glPushMatrix();
+    glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+    glTranslatef(0.0f,2, 0.0f);
+	glScaled(2.5,2.5,2.5);
+	glRotated(-90,1,0,0);
+	glutSolidCone(1,2,60,1);
+	glPopMatrix();
+
+
+
+	// Draw batang
+	glPushMatrix();
+	glColor3f(0.8f, 0.4f, 0.1f);     // coklat
+    glTranslatef(0.0f, 1.5f, 0.0f);
+    glScaled(1.1,6,1);
+    glutSolidCube(0.5f);
+    glPopMatrix();
+
+}
+
 void panzer()
 {
     glPushMatrix();
@@ -1146,39 +1137,97 @@ void display(void) {
 	gluLookAt(viewx, viewy, viewz, 0.0, 0.0, 5.0, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
-
+    //glBindTexture(GL_TEXTURE_2D,texture[1]);
 	drawScene();
 
 	glPopMatrix();
 
-	glPushMatrix();
+	/*glPushMatrix();
 
 	drawSceneTanah(_terrainTanah, 0.7f, 0.2f, 0.1f);
-	glPopMatrix();
+	glPopMatrix();*/
 
 	glPushMatrix();
-
+    //glBindTexture(GL_TEXTURE_2D,texture[0]);
 	drawSceneTanah(_terrainAir, 0.0f, 0.2f, 0.5f);
 	glPopMatrix();
 
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D,texture[12]);
 	glScaled(60, 70, 50);
-	glTranslatef(-2, 0, 3);
+	glTranslatef(-2, 0.2, 2.5);
 	glRotatef(270,0,1,0);
 	glColor3f(0.2,0.4,0.5);
 	garasi();
 	glPopMatrix();
 
 
+
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D,texture[10]);
 	glScaled(20, 20, 20);
-	glTranslatef(-4.5+posx,0.5,3.5+posz);
+	glTranslatef(-4.5+posx,posy-0.85,3.5+posz);
     glRotatef(muter,0,1,0);
 	panzer();
 	glPopMatrix();
 
+
+    for (tree=0;tree<=70;tree=tree+7)
+    {
+        //pohon berjajar di ujung terrain
+
+        glPushMatrix();
+        glScaled(5,7,5);
+        glTranslatef(-25.0+tree,1.5,-35.0);
+        pohon();
+        glPopMatrix();
+    }
+
+
+    //pohon disamping kanan
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(10.0,posy,1.0);
+    pohon();
+    glPopMatrix();
+
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(17.0,posy,1.0);
+    pohon();
+    glPopMatrix();
+
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(25.0,posy,1.0);
+    pohon();
+    glPopMatrix();
+
+    //pohon 3 biji disamping kiri
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(10.0,posy,23.0);
+    pohon();
+    glPopMatrix();
+
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(17.0,posy,23.0);
+    pohon();
+    glPopMatrix();
+
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(25.0,posy,23.0);
+    pohon();
+    glPopMatrix();
+
+    //pohon di dekat panser
+    glPushMatrix();
+    glScaled(5,7,5);
+    glTranslatef(-48.0,posy,30.0);
+    pohon();
+    glPopMatrix();
 
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE); //disable the color mask
 	glDepthMask(GL_FALSE); //disable the depth mask
@@ -1234,8 +1283,7 @@ void init(void) {
 	texture[12] = loadtextures("kenteng.bmp",1200,798);
 	texture[1] = loadtextures("water.bmp", 256, 256);
 	texture[2] = loadtextures("Water.raw", 400, 199);//lantai
-	texture[0] = loadtextures3D("rumput.bmp", 400, 199);
-	texture[4] = loadtextures3D("rumput.bmp", 400, 199);
+	texture[0] = loadtextures("rumput.bmp", 400, 199);
 
 	//binding texture
 
@@ -1360,6 +1408,23 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Tugas Besar Grafkom");
 	init();
+	cout<<"TUGAS BESAR GRAFIKA KOMPUTER"<<endl;
+	cout<<"ANGGOTA :"<<endl;
+	cout<<"1.Hindaka - 10108392"<<endl;
+	cout<<"2.Rio Yudha P - 10108395"<<endl;
+	cout<<"3.Feisel Arda - 10108408"<<endl;
+	cout<<"4.Zulmi - 10108411"<<endl;
+	cout<<endl<<endl;
+	cout<<"Tombol yang dapat digunakan";
+	cout<<"w untuk meningkatkan view y "<<endl;
+	cout<<"s untuk menurunkan view y"<<endl;
+	cout<<"q untuk rotasi ke kanan"<<endl;
+	cout<<"e untuk rotasi ke kiri"<<endl;
+	cout<<endl<<endl;
+	cout<<"m untuk menjalan panser otomatis"<<endl;
+	cout<<"n untuk menghentikan panser yang berjalan"<<endl;
+	cout<<"dapat menggunakan direction pad";
+
 
 	glutDisplayFunc(display);
 	glutIdleFunc(display);
